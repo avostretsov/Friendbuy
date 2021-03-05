@@ -1,0 +1,7 @@
+{
+  "baseUrl": "TBD",
+  "chromeWebSecurity": false,
+  "video": false,
+  "viewportHeight": 800,
+  "viewportWidth": 1280
+}

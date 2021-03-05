@@ -1,0 +1,26 @@
+{
+  "name": "friendbuy",
+  "version": "1.0.0",
+  "description": "Friendbuy SDET Exercise",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run cy:run && npm run pm:run",
+    "cy:open": "./node_modules/.bin/cypress open",
+    "cy:run": "cypress run",
+    "pm:run": "newman run spec/postman/Friendbuy.postman_collection.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avostretsov/Friendbuy.git"
+  },
+  "author": "Alexander Vostretsov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avostretsov/Friendbuy/issues"
+  },
+  "homepage": "https://github.com/avostretsov/Friendbuy#readme",
+  "devDependencies": {
+    "cypress": "^6.6.0",
+    "newman": "^5.1.2"
+  }
+}
