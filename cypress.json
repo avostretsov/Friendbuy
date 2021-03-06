@@ -1,5 +1,5 @@
 {
-  "baseUrl": "TBD",
+  "baseUrl": "https://webstore.fbot-sandbox.me",
   "chromeWebSecurity": false,
   "video": false,
   "viewportHeight": 800,

@@ -7,7 +7,7 @@
     "test": "npm run cy:run && npm run pm:run",
     "cy:open": "./node_modules/.bin/cypress open",
     "cy:run": "cypress run",
-    "pm:run": "newman run spec/postman/Friendbuy.postman_collection.json"
+    "pm:run": "newman run spec/postman/Friendbuy.postman_collection.json -d secrets.json"
   },
   "repository": {
     "type": "git",

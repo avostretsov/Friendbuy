@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "ec65fb8f-4f3f-4ad8-9be2-6a42d8b5d6ba",
+		"name": "Friendbuy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users-all",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"",
+							"pm.test(\"Successful GET request\",  () => {",
+							"   pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Response time is less than 2000ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000)",
+							"})",
+							"",
+							"pm.test(\"Response returns at least one user id\", () => {",
+							"    pm.expect(jsonData[0].id).to.exist",
+							"})",
+							"",
+							"pm.variables.set(\"email\", jsonData[0].email)",
+							"pm.variables.set(\"password\", jsonData[0].password)",
+							"pm.variables.set(\"user_id\", jsonData[0].id)",
+							"pm.variables.set(\"group\", jsonData[0].group)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{host}}/dev/users",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dev",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth-token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"",
+							"pm.test(\"Successful POST request\",  () => {",
+							"   pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Response time is less than 2000ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000)",
+							"})",
+							"",
+							"pm.test(\"Resp body return token\", () => {",
+							"    pm.expect(jsonData.token).to.exist",
+							"})",
+							"",
+							"pm.variables.set(\"token\", jsonData.token)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ZmJ0LXRlc3RlcjpIZFhXeVZvd2NVRnJjR2FNanNvZkdHSjQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"email\": \"QATester@friendbuy.com\",\n     \"password\": \"interview\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}/dev/auth",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dev",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User-by-id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"",
+							"pm.test(\"Successful GET request\",  () => {",
+							"   pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Response time is less than 2000ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000)",
+							"})",
+							"",
+							"pm.test(\"Response returns correct user id of a user requested\", () => {",
+							"    pm.expect(jsonData.id).to.eql(pm.variables.get(\"user_id\"))",
+							"})",
+							"",
+							"pm.test(\"Response returns correct email of user requested\", () => {",
+							"    pm.expect(jsonData.email).to.eql(pm.variables.get(\"email\"))",
+							"})",
+							"",
+							"pm.test(\"Response returns correct group of user requested\", () => {",
+							"    pm.expect(jsonData.group).to.eql(pm.variables.get(\"group\"))",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{host}}/dev/users/{{user_id}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dev",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "36be6q65gl.execute-api.us-east-1.amazonaws.com"
+		},
+		{
+			"key": "protocol",
+			"value": "https"
+		}
+	]
+}
