@@ -96,7 +96,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "ZmJ0LXRlc3RlcjpIZFhXeVZvd2NVRnJjR2FNanNvZkdHSjQ",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -165,7 +165,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "{{token}}",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
